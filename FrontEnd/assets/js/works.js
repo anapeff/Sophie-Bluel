@@ -1,4 +1,4 @@
-// Ajout les projets de l'architecte
+// Ajout des projets de l'architecte
 async function fetchWorks() {
   try {
     // Chemin pour l'API works
