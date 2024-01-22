@@ -29,7 +29,14 @@ async function fetchWorks() {
       image.alt = project.title;
       titre.innerHTML = project.title;
 
-      // Ajoute les éléments à la galerie
+      
+
+       // Ajouter une classe pour stocker l'ID de la catégorie du projet
+       // Appeler l'id du bouton et le comparer avec celui des travaux
+  figure.setAttribute('data-category', project.categoryId);
+
+// Ajoute les éléments à la galerie
+
       gallery.appendChild(figure);
       figure.appendChild(image);
       figure.appendChild(titre);
