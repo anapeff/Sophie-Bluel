@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Si la réponse est OK (statut 200)
             if (response.ok) {
                 // Avoir le token de la réponse JSON
-                const { token } = await response.json();
+                const responseData = await response.json();
+                const token = responseData.token;
                 console.log("Token récupéré :", token);
                 // Enregistrez le jeton dans le stockage local
                 localStorage.setItem("token", token);
