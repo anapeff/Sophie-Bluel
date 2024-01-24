@@ -82,8 +82,10 @@ async function fetchCategories() {
 
 
  // Ajoutez boucles aux boutons filtres
+
         btnFiltres.forEach(btn => {
             btn.addEventListener('click', () => {
+                
                 const categoryId = btn.getAttribute('data-id');
                 filterProjects(categoryId);
             });
@@ -94,26 +96,16 @@ async function fetchCategories() {
     }
 }
 
-// Fonction pour filtrer les projets en fonction de la catégorie sélectionnée et appliquer le filtre sur la galerie
 async function filterProjects(categoryId) {
     try {
         const gallery = document.querySelector(".gallery");
+        gallery.innerHTML = '';
 
-        gallery.innerHTML = ''; // Efface la galerie actuelle
+        if (!projects) await fetchWorks();
 
-        // Attend la récupération des projets si ce n'est pas déjà fait
-        if (!projects) {
-            await fetchWorks();
-        }
-
-        // Filtrer les projets en fonction de la catégorie
         const filteredProjects = (categoryId === 'all') ? projects : projects.filter(project => project.categoryId == categoryId);
 
-        // Ajouter les projets à la galerie en utilisant la fonction createGallery
-        filteredProjects.forEach(project => {
-            const figure = createGallery(project);
-            gallery.appendChild(figure);
-        });
+        filteredProjects.forEach(project => gallery.appendChild(createGallery(project)));
 
         console.log('ok filtres');
     } catch (error) {
@@ -121,5 +113,4 @@ async function filterProjects(categoryId) {
     }
 }
 
-// Fonction pour récupérer les catégories après l'affichage des projets
 fetchCategories();
