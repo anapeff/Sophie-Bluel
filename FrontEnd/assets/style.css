@@ -361,6 +361,30 @@ a {
 
 
 
+/* CSS modale*/
+
+.modal {
+	position: fixed;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	display: none; /* Cacher la modale */
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-wrapper {
+	overflow: auto;
+	width: 600px;
+	height: 400px;
+	max-width: calc(100vh- 20px);
+	padding: 20px;
+	background-color: #FFF;
+}
+
 
 
 
