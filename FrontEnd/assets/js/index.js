@@ -1,5 +1,12 @@
-// Variable globale pour stocker les projets
+// Variable pour stocker les projets
 let projects;
+
+
+// Variable gallery utilisé dans fetchWorks et filterProjects
+const gallery = document.querySelector(".gallery");
+
+
+
 
 // Fonction pour créer la galerie avec les projets
 function createGallery(project) {
@@ -29,8 +36,8 @@ async function fetchWorks() {
         // Mettre réponse dans un fichier .json
         projects = await response.json();
 
-        // Appel de la classe "gallery" dans le code html
-        const gallery = document.querySelector(".gallery");
+       
+
 
         // Ajouter les projets à la galerie en utilisant la fonction createGallery
         projects.forEach(project => {
@@ -81,7 +88,7 @@ async function fetchCategories() {
         const btnFiltres = document.querySelectorAll('.btn-filtres');
 
 
- // Ajoutez boucles aux boutons filtres
+ // Ajoute boucles aux boutons filtres
 
         btnFiltres.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -98,7 +105,7 @@ async function fetchCategories() {
 
 async function filterProjects(categoryId) {
     try {
-        const gallery = document.querySelector(".gallery");
+        
         gallery.innerHTML = '';
 
         if (!projects) await fetchWorks();
@@ -108,6 +115,8 @@ async function filterProjects(categoryId) {
         filteredProjects.forEach(project => gallery.appendChild(createGallery(project)));
 
         console.log('ok filtres');
+
+
     } catch (error) {
         console.error('Erreur lors de la filtration et du rendu des projets :', error);
     }

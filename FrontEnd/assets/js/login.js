@@ -19,9 +19,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 const responseData = await response.json();
                 const token = responseData.token;
                 console.log("Token récupéré :", token);
-                // Enregistrez le jeton dans le stockage local
+                // Enregistre le jeton dans le stockage local
                 localStorage.setItem("token", token);
-                // Redirigez l'utilisateur vers la page index.html
+                // Redirige l'utilisateur vers la page index.html
                 window.location.href = "index.html";
             } else {
                 badLogin(response.status);
@@ -55,9 +55,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const isLoggedIn = localStorage.getItem("token");
             
             if (isLoggedIn === "true") {
-                 // Si déjà connecté, rediriger vers la page index.html
+                 // Si déjà connecté, va vers index.html
                  window.location.href = "index.html";
-                 // Si non connecté, récupérez les valeurs du formulaire et appelez la fonction de connexion
+                 // Si non connecté, récupéreles valeurs du formulaire et appelle la fonction de connexion
             } else {
                 const email = document.querySelector("#email").value;
                 const password = document.querySelector("#password").value;
