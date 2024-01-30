@@ -9,7 +9,7 @@ const openModal = function (e) {
   
        
         console.log('Sélec elem ', target);
-        target.classList.remove('hidden'); // Supprimez la classe hidden
+        target.classList.remove('hidden'); // Supprime la classe hidden
         target.removeAttribute('aria-hidden');
         target.setAttribute('aria-modal', 'true');
         modal = target;
@@ -23,7 +23,7 @@ const closeModal = function (e) {
     if (modal === null) return;
     e.preventDefault();
 
-    modal.classList.add('hidden'); // Ajoutez la classe hidden
+    modal.classList.add('hidden'); // Ajoute la classe hidden
     modal.setAttribute('aria-hidden', 'true');
     modal.removeAttribute('aria-modal');
     modal.removeEventListener('click', closeModal);
