@@ -363,12 +363,16 @@ a {
 
 /* CSS modale*/
 
+.modal.hidden {
+    display: none;
+}
+
 .modal {
 	position: fixed;
 	display:flex;
 	align-items: center;
 	justify-content: center;
-	display: none; /* Cacher la modale */
+	display: none;
 	top:0;
 	left: 0;
 	width: 100%;
@@ -380,7 +384,7 @@ a {
 	overflow: auto;
 	width: 600px;
 	height: 400px;
-	max-width: calc(100vh- 20px);
+	max-width: calc(100vh - 20px);
 	padding: 20px;
 	background-color: #FFF;
 }
