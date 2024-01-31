@@ -363,16 +363,12 @@ a {
 
 /* CSS modale*/
 
-.modal.hidden {
+.hidden {
     display: none;
 }
 
 .modal {
 	position: fixed;
-	display:flex;
-	align-items: center;
-	justify-content: center;
-	display: none;
 	top:0;
 	left: 0;
 	width: 100%;
@@ -382,13 +378,21 @@ a {
 
 .modal-wrapper {
 	overflow: auto;
-	width: 600px;
-	height: 400px;
-	max-width: calc(100vh - 20px);
+	width: 50%;
+	margin: 0 auto;
 	padding: 20px;
 	background-color: #FFF;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
+.gallery-modal{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	gap: 20px;
+}
 
-
-
+.gallery-modal figure img{
+	width: 100%;
+}

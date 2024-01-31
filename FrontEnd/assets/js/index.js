@@ -4,6 +4,7 @@ let projects;
 
 // Variable gallery utilisé dans fetchWorks et filterProjects
 const gallery = document.querySelector(".gallery");
+const galleryModal = document.querySelector('.gallery-modal');
 
 
 
@@ -20,6 +21,23 @@ function createGallery(project) {
 
     figure.appendChild(image);
     figure.appendChild(titre);
+
+    return figure;
+}
+
+function createGalleryModal(project) {
+    const figure = document.createElement("figure");
+    const image = document.createElement("img");
+    const btnDelete = document.createElement('button');
+
+    const trash = document.createElement('i');
+    trash.classList.add('fa-solid', 'fa-trash-can')
+
+    image.src = project.imageUrl;
+    image.alt = project.title;
+    figure.appendChild(image);
+    figure.appendChild(btnDelete);
+    btnDelete.appendChild(trash);
 
     return figure;
 }
@@ -42,6 +60,7 @@ async function fetchWorks() {
         // Ajouter les projets à la galerie en utilisant la fonction createGallery
         projects.forEach(project => {
             gallery.appendChild(createGallery(project));
+            galleryModal.appendChild(createGalleryModal(project));
         });
 
     } catch (error) {
