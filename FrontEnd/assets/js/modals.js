@@ -37,3 +37,7 @@ document.querySelectorAll('.js-modal').forEach(a => {
 const stopPropagation = function (e){
     e.stopPropagation()
 }
+
+
+
+
