@@ -37,16 +37,20 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>	
 
-
-
-
-		<a href="#modal1" class="js-modal" >Modifier <i class="fa-regular fa-pen-to-square"></i></a>
+		<div class="projects-header">
+			<h2>Mes Projets</h2>
+			<a href="#modal1" class="js-modal"><i class="fa-regular fa-pen-to-square"></i>Modifier</a>
+		</div>
+		
 		<aside id="modal1" class="modal hidden" aria-hidden="true" aria-modal="false" >
 			<div class="modal-wrapper js-modal-stop">
-				<button class="close">Fermer</button>
-				<h2>Galerie photo</h2>
+
+				<div class="gallery-header">
+					<span class="close"><i class="fa-solid fa-xmark"></i></span>
+					<h2>Galerie photo</h2>
+				</div>
+				
 				<div class="gallery-modal"></div>
 				<div class="container-button-modal">
 					<button class="button-modal-1">Ajouter une photo</button>
@@ -56,7 +60,41 @@
 	
 
 
-		
+			<aside class="modal2 hidden">
+				<span class="arrow-left"><i class="fa-solid fa-arrow-left"></i></span>
+				<span class="close" ><i class="fa-solid fa-xmark"></i></span>
+				<h2>Ajouter une photo</h2>
+
+				<form id="form-add-new-work js-modal-stop">
+					<div class="container-file">
+						<i class="fa-regular fa-image"></i>
+						<label for="file" class="label-file">+ Ajouter une photo</label>
+						<p>jpg, png : 4mo max</p>
+						<input type="file" name="image" id="file" accept="image/jpeg, image/png" required>
+						<img id="previewImage" src="#" alt="Aperçu de l'image">
+					</div>
+					<label for="title">Titre</label>
+					<input type="text" name="title" id="title" required>
+					<label for="category-input">Catégorie</label>
+
+					<select id="category-input" name="category" required>
+						<option value="" disabled selected hidden>Sélectionnez une catégorie</option>
+						<option value="1">Objets</option>
+						<option value="2">Appartements</option>
+						<option value="3">Hôtels & retaurants</option>
+					</select>
+
+					<div class="container-button-addworks">
+						<button type="submit" id="submitBtn" class="button-modal-2 button-modal-2-active">Valider</button>
+					</div>
+				</form>
+			</aside>
+
+
+
+
+
+
 
 	
 		

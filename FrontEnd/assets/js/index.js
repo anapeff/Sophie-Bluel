@@ -14,6 +14,7 @@ function createGallery(project) {
     const figure = document.createElement("figure");
     const image = document.createElement("img");
     const titre = document.createElement("figcaption");
+    
 
     image.src = project.imageUrl;
     image.alt = project.title;
