@@ -420,15 +420,15 @@ a {
 .modal-wrapper {
 	overflow: hidden;
 	width: 50%;
-	margin: 0px auto; /* Ajoutez une marge en haut et en bas */
+	margin: 0px auto; 
 	
-	padding: 20px 80px 20px 80px;
+	padding : 20px 80px 20px 80px;
 	background-color: #FFF;
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
 	max-width: 70vh;
-    border-radius: 15px; /* Ajoutez cette propriété */
+    border-radius: 15px; 
 }
 
 .gallery-modal{
@@ -464,7 +464,7 @@ a {
     background-color: transparent;
     border: none;
     cursor: pointer;
-	background-color: black; /* Couleur de fond noire */
+	background-color: black;
 }
 
 
@@ -498,9 +498,12 @@ a {
 }
 
 
-
-
-
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer; 
+}
 
 .container-button-modal button {
 	background-color: #1d6154;
@@ -525,46 +528,37 @@ a {
 
 /* Modale 2 - Add works */
 .modal2 {
-	background-color: white;
-	width: 40%;
-	height: 50%;
-	border-radius: 0.75rem;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-around;
-	position: relative;
+	overflow: hidden;
+	width: 50%;
+	margin: 0px auto; /* Ajoute une marge en haut et en bas */
+	
+	padding: 20px 80px 20px 80px;
+	background-color: #FFF;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	max-width: 70vh;
+    border-radius: 15px; 
+ 
+  
 }
 
 .modal2 .arrow-left .fa-arrow-left {
 	position: absolute;
-    top: 1.25rem;
-    left: 1.25rem;
-	font-size: 1.3rem;
-    cursor: pointer;
-}
+    top: 10px;
+    left: 10px;
 
-.modal2 .close.fa-xmark {
-	position: absolute;
-	top: 1.25rem;
-	right: 1.25rem;
-	font-size: 1.3rem;
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .modal2 h2 {
 	margin-top: 10px;
     font-weight: bold;
     font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-.modal2 form {
-	display: flex;
-    justify-content: center;
-    flex-direction: column;
-    height: 80%;
-    width: 75%;
-    gap: 20px;
-}
 
 .modal2 form .container-file {
 	display: flex;
@@ -575,20 +569,22 @@ a {
     height: 40%;
     background-color: #e8f1f6;
     gap: 10px;
+    width: 100%;
 }
 
 .modal2 form .container-file img {
 	display: none;
-    max-width: 100%;
+    width: 100%;
     height: 100%;
-    z-index: 2;
-    position: absolute;
+   
+   
 }
 
 .modal2 form .container-file .fa-image {
 	margin-top: 1rem;
 	font-size: 4rem;
     color: #b9c5cc;
+   
 }
 
 .modal2 form .container-file .label-file {
@@ -601,6 +597,8 @@ a {
     padding: 0 20px;
     color: #306685;
     cursor: pointer;
+  
+   
 }
 
 .modal2 form .container-file input {
@@ -608,14 +606,17 @@ a {
 }
 
 .modal2 form #title {
-	height: 3.12rem;
+	height: 51px;
+    width: 100%;
 	font-size: 0.8rem;
 	border: none;
 	box-shadow: 0 0.25rem 0.87rem rgba(0, 0, 0, 0.09);
+  
 }
 
 .modal2 form #category-input {
-	height: 3.12rem;
+    width: 100%;
+	height: 51px;
 	font-size: 0.8rem;
 	border: none;
 	box-shadow: 0 0.25rem 0.87rem rgba(0, 0, 0, 0.09);
@@ -659,5 +660,3 @@ a {
     cursor: pointer;
 	border: none;
 }
-
-

@@ -1,7 +1,10 @@
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     let modal = null;
     let modal2 = null;
-    
+   
 
     const openModal = function (e) {
         e.preventDefault();
@@ -27,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
             modal2.setAttribute('aria-modal', 'true');
             modal2.addEventListener('click', stopPropagation);
             modal2.querySelector('.close').addEventListener('click', closeModal);
-            modal2.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
+           
         }
     };
 
@@ -57,8 +60,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             modal2 = null;
         }
+        
     };
-
+    
 
     document.querySelectorAll('.js-modal').forEach(a => {
         a.addEventListener('click', openModal);
@@ -74,4 +78,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
    
 });
-  
+
+

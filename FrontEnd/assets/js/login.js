@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (loginForm) {
         loginForm.addEventListener("submit", async (event) => {
             event.preventDefault();
-              // Vérifiez si déjà connecté
+              // Vérifie si déjà connecté
             const isLoggedIn = localStorage.getItem("token");
             
             if (isLoggedIn === "true") {

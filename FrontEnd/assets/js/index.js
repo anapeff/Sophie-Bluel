@@ -1,3 +1,8 @@
+
+
+
+
+
 // Variable pour stocker les projets
 let projects;
 
@@ -143,3 +148,99 @@ async function filterProjects(categoryId) {
 }
 
 fetchCategories();
+
+
+
+
+// Ajouter une nouvelle image : 
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const addNewWorkForm = document.getElementById("form-add-new-work");
+
+    if (addNewWorkForm) {
+        const fileInput = document.getElementById("file");
+        const previewImage = document.getElementById("previewImage");
+        console.log(previewImage);
+
+        // Voir image avant de valdier 
+
+
+        fileInput.addEventListener('change', function (event) {
+
+
+            console.log("je veux voir mon image stp");
+
+
+            const file = event.target.files[0];
+    
+
+
+
+            if (file) {
+                console.log("image :", file);
+                const reader = new FileReader();
+    
+                reader.addEventListener('load', function (e) {
+           
+                    previewImage.src = e.target.result;
+                });
+    
+                reader.readAsDataURL(file);
+            }
+        });
+
+
+
+
+
+
+        addNewWorkForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+         
+            // Récupérer les valeurs du formulaire
+            const title = document.getElementById("title").value;
+            const category = document.getElementById("category-input").value;
+            const image = fileInput.files[0];
+
+            // Vérifier si une image a été sélectionnée
+            if (!image) {
+                alert("Veuillez sélectionner une image.");
+                return;
+            }
+
+            // Créer un objet FormData pour envoyer les données
+            const formData = new FormData();
+            formData.append("title", title);
+            formData.append("categoryId", category);
+            formData.append("image", image);
+
+            try {
+                // Envoyer les données au serveur
+                const response = await fetch("http://localhost:5678/api/works", {
+                    method: "POST",
+                    body: formData,
+                });
+                console.log("Réponse de la requête POST :", response); 
+
+                if (!response.ok) {
+                    throw new Error(`Erreur lors de l'ajout du projet, statut ${response.status}`);
+                }
+
+                // Ajout projet à la liste des projets
+                const newProject = await response.json();
+                projects.push(newProject);
+
+                // Mettre à jour la galerie
+                gallery.appendChild(createGallery(newProject));
+
+                // Fermer la modal2
+                closeModal();
+            } catch (error) {
+                console.error('Erreur pour ajouter projet :', error);
+            }
+        });
+    }
+});
