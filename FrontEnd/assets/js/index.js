@@ -1,8 +1,3 @@
-
-
-
-
-
 // Variable pour stocker les projets
 let projects;
 
@@ -68,6 +63,7 @@ async function fetchWorks() {
             gallery.appendChild(createGallery(project));
             galleryModal.appendChild(createGalleryModal(project));
         });
+        addworks();
 
     } catch (error) {
         console.error('Erreur lors de la récupération des œuvres :', error);
@@ -154,11 +150,9 @@ fetchCategories();
 
 // Ajouter une nouvelle image : 
 
-
+const addNewWorkForm = document.getElementById("form-add-new-work");
 
 document.addEventListener('DOMContentLoaded', function () {
-
-    const addNewWorkForm = document.getElementById("form-add-new-work");
 
     if (addNewWorkForm) {
         const fileInput = document.getElementById("file");
@@ -191,56 +185,54 @@ document.addEventListener('DOMContentLoaded', function () {
                 reader.readAsDataURL(file);
             }
         });
-
-
-
-
-
-
-        addNewWorkForm.addEventListener("submit", async function (e) {
-            e.preventDefault();
-         
-            // Récupérer les valeurs du formulaire
-            const title = document.getElementById("title").value;
-            const category = document.getElementById("category-input").value;
-            const image = fileInput.files[0];
-
-            // Vérifier si une image a été sélectionnée
-            if (!image) {
-                alert("Veuillez sélectionner une image.");
-                return;
-            }
-
-            // Créer un objet FormData pour envoyer les données
-            const formData = new FormData();
-            formData.append("title", title);
-            formData.append("categoryId", category);
-            formData.append("image", image);
-
-            try {
-                // Envoyer les données au serveur
-                const response = await fetch("http://localhost:5678/api/works", {
-                    method: "POST",
-                    body: formData,
-                });
-                console.log("Réponse de la requête POST :", response); 
-
-                if (!response.ok) {
-                    throw new Error(`Erreur lors de l'ajout du projet, statut ${response.status}`);
-                }
-
-                // Ajout projet à la liste des projets
-                const newProject = await response.json();
-                projects.push(newProject);
-
-                // Mettre à jour la galerie
-                gallery.appendChild(createGallery(newProject));
-
-                // Fermer la modal2
-                closeModal();
-            } catch (error) {
-                console.error('Erreur pour ajouter projet :', error);
-            }
-        });
-    }
+    }    
 });
+
+
+
+
+function addworks(){
+    addNewWorkForm.addEventListener("click", async function (e) {
+        e.preventDefault();
+     
+        // Récupérer les valeurs du formulaire
+        const title = document.getElementById("title");
+        const category = document.getElementById("category-input");
+        const image = document.getElementById("file");
+        
+        // Vérifier si une image a été sélectionnée
+        if (!image) {
+            alert("Veuillez sélectionner une image.");
+            return;
+        }
+        // Créer un objet FormData pour envoyer les données
+        const token = localStorage.getItem('token');
+        const formData = new FormData();
+        formData.append("title", title.value);
+        formData.append("categoryId", category.value);
+        formData.append("image", image.files[0]);
+        try {
+            // Envoyer les données au serveur
+            const response = await fetch("http://localhost:5678/api/works", {
+                method: "POST",
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: formData,
+            });
+            console.log("Réponse de la requête POST :", response); 
+            if (!response.ok) {
+                throw new Error(`Erreur lors de l'ajout du projet, statut ${response.status}`);
+            }
+            // Ajout projet à la liste des projets
+            const newProject = await response.json();
+            projects.push(newProject);
+            // Mettre à jour la galerie
+            gallery.appendChild(createGallery(newProject));
+            // Fermer la modal2
+            //closeModal();
+        } catch (error) {
+            console.error('Erreur pour ajouter projet :', error);
+        }
+    });
+}

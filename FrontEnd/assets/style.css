@@ -528,18 +528,16 @@ a {
 
 /* Modale 2 - Add works */
 .modal2 {
-	overflow: hidden;
-	width: 50%;
-	margin: 0px auto; /* Ajoute une marge en haut et en bas */
-	
-	padding: 20px 80px 20px 80px;
-	background-color: #FFF;
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	max-width: 70vh;
-    border-radius: 15px; 
- 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    max-width: 70vh;
+    padding: 20px 80px;
+    background-color: #FFF;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5); /* Ajout de l'ombre */
   
 }
 

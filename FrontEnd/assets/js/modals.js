@@ -1,6 +1,3 @@
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
     let modal = null;
     let modal2 = null;
@@ -23,6 +20,24 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     const openModal2 = function (e) {
         e.preventDefault();
+        modal = document.querySelector('.modal');
+        modal2 = document.querySelector('.modal2');
+        if (modal) {
+            modal.classList.add('hidden');
+        }
+        if (modal2) {
+            modal2.classList.remove('hidden');
+            modal2.classList.add('hidden');
+            modal2.setAttribute('aria-hidden', 'true');
+            modal2.removeAttribute('aria-modal');
+            modal2.removeEventListener('click', closeModal);
+            const closeButton = modal.querySelector('.close');
+            if (closeButton) {
+                closeButton.removeEventListener('click', closeModal);
+            }
+            modal = null;
+        }
+    
         modal2 = document.querySelector('.modal2');
         if (modal2) {
             modal2.classList.remove('hidden');
@@ -30,25 +45,25 @@ document.addEventListener('DOMContentLoaded', function () {
             modal2.setAttribute('aria-modal', 'true');
             modal2.addEventListener('click', stopPropagation);
             modal2.querySelector('.close').addEventListener('click', closeModal);
-           
         }
     };
 
     const closeModal = function (e) {
-        if (modal === null) return;
+        if (modal === null && modal2 === null) return;
         e.preventDefault();
-
-        modal.classList.add('hidden');
-        modal.setAttribute('aria-hidden', 'true');
-        modal.removeAttribute('aria-modal');
-        modal.removeEventListener('click', closeModal);
-
-        const closeButton = modal.querySelector('.close');
-        if (closeButton) {
-            closeButton.removeEventListener('click', closeModal);
+    
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.setAttribute('aria-hidden', 'true');
+            modal.removeAttribute('aria-modal');
+            modal.removeEventListener('click', closeModal);
+            const closeButton = modal.querySelector('.close');
+            if (closeButton) {
+                closeButton.removeEventListener('click', closeModal);
+            }
+            modal = null;
         }
-
-        modal = null;
+        
         if (modal2) {
             modal2.classList.add('hidden');
             modal2.setAttribute('aria-hidden', 'true');
@@ -60,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             modal2 = null;
         }
-        
     };
     
 
@@ -78,5 +92,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
    
 });
-
 

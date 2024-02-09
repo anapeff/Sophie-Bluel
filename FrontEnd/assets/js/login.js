@@ -48,8 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             loginButton.textContent = "Login";
         }
-
-        console.log("Updated login button:", loginButton.textContent, "Is logged in:", isLoggedIn);
     }
 
     function logout() {
