@@ -40,6 +40,13 @@ function createGalleryModal(project) {
     figure.appendChild(btnDelete);
     btnDelete.appendChild(trash);
 
+
+   // Evénements pour le bouton de la corbeille
+   btnDelete.addEventListener('click', () => {
+    deleteProject(project.id);
+});
+
+
     return figure;
 }
 
@@ -183,7 +190,45 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+// Ajouter une nouvelle image : 
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log("Le contenu de la page est chargé.");
+    const addNewWorkForm = document.getElementById("form-add-new-work");
+    if (addNewWorkForm) {
+        const fileInput = document.getElementById("file");
+        const previewImage = document.getElementById("previewImage");
+        console.log(previewImage);
+
+        // Voir image avant de valider 
+
+        if (fileInput) {
+            fileInput.addEventListener('change', function (event) {
+                const file = event.target.files[0];
+    
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+        
+                    reader.addEventListener('load', function (e) {
+                        previewImage.src = e.target.result;
+                    });
+        
+                    reader.readAsDataURL(file);
+                } else {
+                    console.log("Veuillez sélectionner une image.");
+                }
+            });
+        } else {
+            console.error("Champ de fichier introuvable.");
+        }
+        
+        addworks(); // Appel de la fonction addworks ici
+    }
+});
+
 function addworks() {
+    const addNewWorkForm = document.getElementById("form-add-new-work");
     addNewWorkForm.addEventListener("submit", async function (e) {
         e.preventDefault();
      
@@ -229,12 +274,39 @@ function addworks() {
             projects.push(newProject);
             // Mettre à jour la galerie
             gallery.appendChild(createGallery(newProject));
-            // Fermer la modal2
-            // closeModal();
+      
         } catch (error) {
             console.error('Erreur pour ajouter projet :', error);
         }
     });
 }
+// Fonction pour supprimer un projet
+async function deleteProject(projectId) {
+    try {
+        const response = await fetch(`http://localhost:5678/api/works/${projectId}`, {
+            method: "DELETE",
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+        if (!response.ok) {
+            throw new Error(`Erreur lors de la suppression du projet, statut ${response.status}`);
+        }
+        // Supprimer le projet de la liste
+        projects = projects.filter(project => project.id !== projectId);
+        // Mettre à jour la galerie et la modal
+        updateGalleryAndModal();
+    } catch (error) {
+        console.error('Erreur lors de la suppression du projet :', error);
+    }
+}
 
-addworks();
+// Fonction pour mettre à jour la galerie et la modal
+function updateGalleryAndModal() {
+    gallery.innerHTML = '';
+    galleryModal.innerHTML = '';
+    projects.forEach(project => {
+        gallery.appendChild(createGallery(project));
+        galleryModal.appendChild(createGalleryModal(project));
+    });
+}
