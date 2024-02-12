@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("loginform");
     const loginButton = document.getElementById("loginButton"); 
+ 
 
     loginButton.addEventListener("click", function (event) {
         event.preventDefault();
@@ -42,11 +43,19 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateLoginButton() {
         const isLoggedIn = localStorage.getItem("token");
         const loginButton = document.getElementById("loginButton");
+        const editLink = document.getElementById("editLink"); 
+     
 
         if (isLoggedIn) {
             loginButton.textContent = "Logout";
+            if (editLink) {
+                editLink.classList.remove("hidden");
+            }
         } else {
             loginButton.textContent = "Login";
+            if (editLink) {
+                editLink.classList.add("hidden");
+            }
         }
     }
 
