@@ -153,64 +153,64 @@ fetchCategories();
 const addNewWorkForm = document.getElementById("form-add-new-work");
 
 document.addEventListener('DOMContentLoaded', function () {
-
+    console.log("Le contenu de la page est chargé.");
     if (addNewWorkForm) {
         const fileInput = document.getElementById("file");
         const previewImage = document.getElementById("previewImage");
         console.log(previewImage);
 
-        // Voir image avant de valdier 
+        // Voir image avant de valider 
 
-
-        fileInput.addEventListener('change', function (event) {
-
-
-            console.log("je veux voir mon image stp");
-
-
-            const file = event.target.files[0];
+        if (fileInput) {
+            fileInput.addEventListener('change', function (event) {
+                const file = event.target.files[0];
     
-
-
-
-            if (file) {
-                console.log("image :", file);
-                const reader = new FileReader();
-    
-                reader.addEventListener('load', function (e) {
-           
-                    previewImage.src = e.target.result;
-                });
-    
-                reader.readAsDataURL(file);
-            }
-        });
-    }    
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+        
+                    reader.addEventListener('load', function (e) {
+                        previewImage.src = e.target.result;
+                    });
+        
+                    reader.readAsDataURL(file);
+                } else {
+                    console.log("Veuillez sélectionner une image.");
+                }
+            });
+        } else {
+            console.error("Champ de fichier introuvable.");
+        }
+    }
 });
 
-
-
-
-function addworks(){
-    addNewWorkForm.addEventListener("click", async function (e) {
+function addworks() {
+    addNewWorkForm.addEventListener("submit", async function (e) {
         e.preventDefault();
      
-        // Récupérer les valeurs du formulaire
-        const title = document.getElementById("title");
-        const category = document.getElementById("category-input");
-        const image = document.getElementById("file");
+       // Récupérer les valeurs du formulaire
+       const title = document.getElementById("title").value;
+       const category = document.getElementById("category-input").value;
+       const image = document.getElementById("file").files[0];
         
-        // Vérifier si une image a été sélectionnée
-        if (!image) {
-            alert("Veuillez sélectionner une image.");
+       // Vérifier si une image a été sélectionnée
+       if (!image) {
+        console.error("Veuillez sélectionner une image.");
+        return;
+       }
+  
+        // Récupérer le token d'authentification depuis localStorage
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.error("Token d'authentification introuvable.");
             return;
         }
         // Créer un objet FormData pour envoyer les données
-        const token = localStorage.getItem('token');
+       
         const formData = new FormData();
-        formData.append("title", title.value);
-        formData.append("categoryId", category.value);
-        formData.append("image", image.files[0]);
+        formData.append("title", title);
+        formData.append("category", category);
+        formData.append("image", image);
+    
         try {
             // Envoyer les données au serveur
             const response = await fetch("http://localhost:5678/api/works", {
@@ -230,9 +230,11 @@ function addworks(){
             // Mettre à jour la galerie
             gallery.appendChild(createGallery(newProject));
             // Fermer la modal2
-            //closeModal();
+            // closeModal();
         } catch (error) {
             console.error('Erreur pour ajouter projet :', error);
         }
     });
 }
+
+addworks();
