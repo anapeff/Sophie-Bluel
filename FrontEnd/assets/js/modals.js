@@ -1,95 +1,56 @@
 document.addEventListener('DOMContentLoaded', function () {
-    let modal = null;
-    let modal2 = null;
-   
+    let modal1 = document.querySelector('#modal1');
+    let modal2 = document.querySelector('.modal2');
 
-    const openModal = function (e) {
-        e.preventDefault();
-        const href = e.target.getAttribute('href');
-        let target = document.querySelector(href);
-        if (target) {
-            target.classList.remove('hidden');
-            target.removeAttribute('aria-hidden');
-            target.setAttribute('aria-modal', 'true');
-            modal = target;
-            modal.addEventListener('click', closeModal);
-            modal.querySelector('.close').addEventListener('click', closeModal);
-            modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
-          
-        }
-    };
-    const openModal2 = function (e) {
-        e.preventDefault();
-        modal = document.querySelector('.modal');
-        modal2 = document.querySelector('.modal2');
-        if (modal) {
-            modal.classList.add('hidden');
-        }
-        if (modal2) {
-            modal2.classList.remove('hidden');
-            modal2.classList.add('hidden');
-            modal2.setAttribute('aria-hidden', 'true');
-            modal2.removeAttribute('aria-modal');
-            modal2.removeEventListener('click', closeModal);
-            const closeButton = modal.querySelector('.close');
-            if (closeButton) {
-                closeButton.removeEventListener('click', closeModal);
-            }
-            modal = null;
-        }
-    
-        modal2 = document.querySelector('.modal2');
-        if (modal2) {
-            modal2.classList.remove('hidden');
-            modal2.removeAttribute('aria-hidden');
-            modal2.setAttribute('aria-modal', 'true');
-            modal2.addEventListener('click', stopPropagation);
-            modal2.querySelector('.close').addEventListener('click', closeModal);
-        }
+    const openModal1 = function () {
+        modal1.classList.remove('hidden');
+        modal1.setAttribute('aria-hidden', 'false');
+        modal1.setAttribute('aria-modal', 'true');
+        modal1.addEventListener('click', stopPropagation);
+        modal1.querySelector('.close').addEventListener('click', closeModal1);
     };
 
-    const closeModal = function (e) {
-        if (modal === null && modal2 === null) return;
-        e.preventDefault();
-    
-        if (modal) {
-            modal.classList.add('hidden');
-            modal.setAttribute('aria-hidden', 'true');
-            modal.removeAttribute('aria-modal');
-            modal.removeEventListener('click', closeModal);
-            const closeButton = modal.querySelector('.close');
-            if (closeButton) {
-                closeButton.removeEventListener('click', closeModal);
-            }
-            modal = null;
-        }
-        
-        if (modal2) {
-            modal2.classList.add('hidden');
-            modal2.setAttribute('aria-hidden', 'true');
-            modal2.removeAttribute('aria-modal');
-            modal2.removeEventListener('click', closeModal);
-            const closeButton = modal2.querySelector('.close');
-            if (closeButton) {
-                closeButton.removeEventListener('click', closeModal);
-            }
-            modal2 = null;
-        }
+    const openModal2 = function () {
+        modal2.classList.remove('hidden');
+        modal2.setAttribute('aria-hidden', 'false');
+        modal2.setAttribute('aria-modal', 'true');
+        modal2.addEventListener('click', stopPropagation);
+        modal2.querySelector('.close').addEventListener('click', closeModal2);
+        modal1.classList.add('hidden'); // Cacher la modal1
     };
-    
+
+    const closeModal1 = function () {
+        modal1.classList.add('hidden');
+        modal1.setAttribute('aria-hidden', 'true');
+        modal1.removeAttribute('aria-modal');
+        modal1.removeEventListener('click', stopPropagation);
+        modal1.querySelector('.close').removeEventListener('click', closeModal1);
+    };
+
+    const closeModal2 = function () {
+        modal2.classList.add('hidden');
+        modal2.setAttribute('aria-hidden', 'true');
+        modal2.removeAttribute('aria-modal');
+        modal2.removeEventListener('click', stopPropagation);
+        modal2.querySelector('.close').removeEventListener('click', closeModal2);
+    };
+
+    const stopPropagation = function (e) {
+        e.stopPropagation();
+    };
 
     document.querySelectorAll('.js-modal').forEach(a => {
-        a.addEventListener('click', openModal);
+        a.addEventListener('click', openModal1);
     });
 
     document.querySelectorAll('.button-modal-1').forEach(btn => {
         btn.addEventListener('click', openModal2);
     });
 
-    const stopPropagation = function (e) {
-        e.stopPropagation();
-    };
-
-   
+    // Gestionnaire d'événements pour la flèche retour sur la modal2
+    const arrowLeft = document.querySelector('.arrow-left');
+    arrowLeft.addEventListener('click', function() {
+        closeModal2(); 
+        openModal1(); 
+    });
 });
-

@@ -44,6 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const isLoggedIn = localStorage.getItem("token");
         const loginButton = document.getElementById("loginButton");
         const editLink = document.getElementById("editLink"); 
+        const filtres = document.querySelector('.filtres'); 
+        const blackBar = document.getElementById("black-bar"); 
      
 
         if (isLoggedIn) {
@@ -51,11 +53,26 @@ document.addEventListener("DOMContentLoaded", function () {
             if (editLink) {
                 editLink.classList.remove("hidden");
             }
+            if (blackBar) {
+                blackBar.classList.remove("hidden");
+            }
+               // Cacher les filtres si l'utilisateur est connecté
+            if (filtres) {
+            filtres.classList.add("hidden");
+        }
         } else {
             loginButton.textContent = "Login";
             if (editLink) {
                 editLink.classList.add("hidden");
             }
+             // Afficher les filtres si l'utilisateur n'est pas connecté
+              // Cacher la barre noire si l'utilisateur n'est pas connecté
+        if (blackBar) {
+            blackBar.classList.add("hidden");
+        }
+        if (filtres) {
+            filtres.classList.remove("hidden");
+        }
         }
     }
 
