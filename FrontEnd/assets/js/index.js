@@ -38,7 +38,8 @@ function createGalleryModal(project) {
     btnDelete.appendChild(trash);
 
    // Événements pour le bouton de la corbeille
-   btnDelete.addEventListener('click', () => {
+   btnDelete.addEventListener('click', (e) => {
+    e.preventDefault(); 
     deleteProject(project.id);
 });
 
@@ -56,6 +57,8 @@ async function fetchWorks() {
 
         // Mettre réponse dans un fichier .json
         projects = await response.json();
+        gallery.innerHTML="";
+        galleryModal.innerHTML="";
 
         // Ajouter les projets à la galerie en utilisant la fonction createGallery
         projects.forEach(project => {
@@ -246,10 +249,11 @@ async function deleteProject(projectId) {
             galleryItem.remove();
         }
         // Supprimer le projet de la modal
-        const modalItem = document.querySelector(`[data-id="modal-${projectId}"]`);
+        const modalItem = document.querySelector(`[data-id="modal--${projectId}"]`);
         if (modalItem) {
             modalItem.remove();
         }
+        await fetchWorks();
     } catch (error) {
         console.error('Erreur lors de la suppression du projet :', error);
     }
