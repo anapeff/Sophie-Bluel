@@ -589,14 +589,21 @@ a {
     align-items: center;
     height: 40%;
     background-color: #e8f1f6;
-    gap: 10px;
+    gap: 15px;
     width: 100%;
+    margin-bottom: 20px;
+   
+}
+#title {
+    margin-bottom: 20px; 
 }
 
 .modal2 form .container-file img {
-	display: none;
-    width: 100%;
+    display: none;
+   
     height: 100%;
+    z-index: 2;
+    position: absolute;
    
    
 }
@@ -607,6 +614,7 @@ a {
     color: #b9c5cc;
    
 }
+
 
 .modal2 form .container-file .label-file {
 	display: block;
@@ -621,6 +629,9 @@ a {
   
    
 }
+
+
+
 
 .modal2 form .container-file input {
 	opacity: 0;

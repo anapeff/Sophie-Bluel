@@ -29,7 +29,7 @@ function createGalleryModal(project) {
     const btnDelete = document.createElement('button');
 
     const trash = document.createElement('i');
-    trash.classList.add('fa-solid', 'fa-trash-can')
+    trash.classList.add('fa-solid', 'fa-trash-can');
 
     image.src = project.imageUrl;
     image.alt = project.title;
@@ -37,7 +37,7 @@ function createGalleryModal(project) {
     figure.appendChild(btnDelete);
     btnDelete.appendChild(trash);
 
-   // Événements pour le bouton de la corbeille
+   // Événement pour le bouton de la corbeille
    btnDelete.addEventListener('click', (e) => {
     e.preventDefault(); 
     deleteProject(project.id);
@@ -148,6 +148,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const previewImage = document.getElementById("previewImage");
         console.log(previewImage);
 
+      
+
         // Voir image avant de valider 
         if (fileInput) {
             fileInput.addEventListener('change', function (event) {
@@ -155,9 +157,16 @@ document.addEventListener('DOMContentLoaded', function () {
        // Vérifier si un fichier d'image est sélectionné
                 if (file && file.type.startsWith('image/')) {
                     const reader = new FileReader();
-        
+                   
                     reader.addEventListener('load', function (e) {
                         previewImage.src = e.target.result;
+
+
+                     // Supprimer la propriété 'display: none;' pour afficher l'image
+                        previewImage.style.display = "block";
+                    
+         
+   
                     });
         
                     reader.readAsDataURL(file);
@@ -248,7 +257,7 @@ async function deleteProject(projectId) {
         if (galleryItem) {
             galleryItem.remove();
         }
-        // Supprimer le projet de la modal
+        // Supprimer le projet de la modale
         const modalItem = document.querySelector(`[data-id="modal--${projectId}"]`);
         if (modalItem) {
             modalItem.remove();
