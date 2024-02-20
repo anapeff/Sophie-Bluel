@@ -116,6 +116,12 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
+nav img {
+    width: 60%;
+}
+#loginButton {
+    color: black; 
+}
 
 li:hover {
 	color: #B1663C;
@@ -147,19 +153,21 @@ li:hover {
     display: flex;
     align-items: center; /* Aligner les éléments verticalement au centre */
 	justify-content: center;
-	margin-bottom: 35px;
+	margin-bottom: 50px;
+    margin-top: 120px;
    
 }
 
 .projects-header h2 {
     margin-right: 15px; 
+
 	
 }
 
 .projects-header a {
     text-decoration: none;
-    color: #1D6154; /* Couleur du lien */
-    font-size: 16px; 
+    color: black;
+    font-size: 14px; 
 }
 .projects-header a i  {
  
@@ -274,48 +282,6 @@ footer nav ul {
 	color: #FFFFFF;
 }
 
-
-
-.oubli {
-    color: black;
-}
-
-.login {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    justify-content: center;
-    align-items: center;
-    padding-top: 100px;
-    padding-bottom: 250px;
-}
-
-.login h2 {
-    padding-bottom: 30px;
-}
-
-.login_email input,
-.login_password input {
-    width: 379px;
-    height: 51px;
-    border: none;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.19);
-}
-
-.login_email p,
-.login_password p {
-    padding-bottom: 10px;
-}
-
-.login_button {
-    width: 179px;
-    height: 36px;
-    border: none;
-}
-
-input .login_button {
-    margin-bottom: 5px;
-}
 
 .bad_login {
     display: none;
@@ -449,14 +415,14 @@ a {
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
-	max-width: 70vh;
+	max-width: 50vh;
     border-radius: 15px; 
 }
 
 .gallery-modal{
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	gap: 20px;
+	gap: 10px;
 
 
 }
@@ -501,11 +467,14 @@ a {
 
 
 .modal-wrapper h2 {
-	margin-top: 10px;
-	margin-bottom: 2rem;
-    font-weight: bold;
-    font-size: 1.5rem;
+	margin-top: 15px;
+	margin-bottom: 30px;
+  font-weight: 400;
+    font-size: 23px;
     text-align: center;
+    color: black;
+    font-family: 'Work Sans', sans-serif;
+
 }
 
 
@@ -516,6 +485,7 @@ a {
     height: 20%;
     width: 100%;
     border-top: 1px solid gray;
+    margin-top: 38px;
 	
 	
 }
@@ -526,16 +496,20 @@ a {
     top: 10px;
     right: 10px;
     cursor: pointer; 
+    margin: 10px;
+    
+
 }
 
 .container-button-modal button {
 	background-color: #1d6154;
     padding: 9px 50px;
-	margin-top: 25px;
+	margin-top: 45px;
+    margin-bottom: 40px;
     border-radius: 25px;
     color: white;
     font-weight: 700;
-    font-size: 1rem;
+
     font-family: Syne;
     cursor: pointer;
 	border: none;
@@ -556,7 +530,7 @@ a {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 50%;
-    max-width: 70vh;
+    max-width: 50vh;
     padding: 20px 80px;
     background-color: #FFF;
     border-radius: 15px;
@@ -564,20 +538,25 @@ a {
   
 }
 
+
+
 .modal2 .arrow-left .fa-arrow-left {
 	position: absolute;
     top: 10px;
     left: 10px;
-
+    margin: 10px;
     cursor: pointer;
 }
 
 .modal2 h2 {
-	margin-top: 10px;
-    font-weight: bold;
-    font-size: 1.5rem;
+    margin-top: 15px;
+	margin-bottom: 30px;
+  font-weight: 400;
+    font-size: 23px;
     text-align: center;
-    margin-bottom: 30px;
+    color: black;
+    font-family: 'Work Sans', sans-serif;
+    
 }
 
 
@@ -587,7 +566,7 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 40%;
+
     background-color: #e8f1f6;
     gap: 15px;
     width: 100%;
@@ -609,15 +588,15 @@ a {
 }
 
 .modal2 form .container-file .fa-image {
-	margin-top: 1rem;
-	font-size: 4rem;
+	margin-top: 10px;
+	font-size: 60px;
     color: #b9c5cc;
    
 }
 
 
 .modal2 form .container-file .label-file {
-	display: block;
+
     display: flex;
     align-items: center;
     background-color: #b9c5cc;
@@ -640,18 +619,22 @@ a {
 .modal2 form #title {
 	height: 51px;
     width: 100%;
-	font-size: 0.8rem;
+	font-size: 14px;
 	border: none;
 	box-shadow: 0 0.25rem 0.87rem rgba(0, 0, 0, 0.09);
+    margin-top: 8px;
   
 }
 
 .modal2 form #category-input {
     width: 100%;
 	height: 51px;
-	font-size: 0.8rem;
+	font-size: 14px;
 	border: none;
 	box-shadow: 0 0.25rem 0.87rem rgba(0, 0, 0, 0.09);
+    margin-top: 8px;
+   
+    
 }
 
 .container-button-addworks {
@@ -661,6 +644,7 @@ a {
     height: 100px;
     width: 100%;
     border-top: 1px solid gray;
+    margin-top: 30px;
 }
 
 .container-button-addworks .button-modal-2 {

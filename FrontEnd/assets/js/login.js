@@ -8,6 +8,16 @@ document.addEventListener("DOMContentLoaded", function () {
         toggleLoginStatus();  //  fonction pour gérer la connexion/déconnexion
     });
 
+    function badLogin(status = null) {
+        const errorMessage = document.querySelector(".bad_login");
+        if (status === 401) {
+            errorMessage.textContent = "Adresse e-mail ou mot de passe incorrect.";
+        } else {
+            errorMessage.textContent = "Erreur lors de la connexion, veuillez réessayer.";
+        }
+        errorMessage.style.display = "block";
+    }
+
     async function login(email, password) {
         try {
             const response = await fetch("http://localhost:5678/api/users/login", {
