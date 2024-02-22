@@ -64,33 +64,35 @@
 		</aside>
 
 			<aside class="modal2 hidden">
-				<span class="arrow-left"><i class="fa-solid fa-arrow-left"></i></span>
-				<span class="close" ><i class="fa-solid fa-xmark"></i></span>
-				<h2>Ajout photo</h2>
-			
-				<form id="form-add-new-work" class="js-modal-stop" action="#">
-					<div class="container-file">
-						<i class="fa-regular fa-image"></i>
-						<label for="file" class="label-file">+ Ajouter une photo</label>
-						<p>jpg, png : 4mo max</p>
-						<input type="file" name="image" id="file" accept="image/jpeg, image/png" required>
-						<img id="previewImage" src="#" alt="Aperçu de l'image">
-					</div>
-					<label for="title">Titre</label>
-					<input type="text" name="title" id="title" required>
-					<label for="category-input">Catégorie</label>
-			
-					<select id="category-input" name="category" required>
-						<option value="" disabled selected hidden>Sélectionnez une catégorie</option>
-						<option value="1">Objets</option>
-						<option value="2">Appartements</option>
-						<option value="3">Hôtels & retaurants</option>
-					</select>
-			
-					<div class="container-button-addworks">
-						<button type="submit" id="submitBtn" class="button-modal-2 button-modal-2-active">Valider</button>
-					</div>
-				</form>
+				<div class="modal-wrapper">
+					<span class="arrow-left"><i class="fa-solid fa-arrow-left"></i></span>
+					<span class="close" ><i class="fa-solid fa-xmark"></i></span>
+					<h2>Ajout photo</h2>
+				
+					<form id="form-add-new-work" class="js-modal-stop" action="#">
+						<div class="container-file">
+							<i class="fa-regular fa-image"></i>
+							<label for="file" class="label-file">+ Ajouter une photo</label>
+							<p>jpg, png : 4mo max</p>
+							<input type="file" name="image" id="file" accept="image/jpeg, image/png" required>
+							<img id="previewImage" src="#" alt="Aperçu de l'image">
+						</div>
+						<label for="title">Titre</label>
+						<input type="text" name="title" id="title" required>
+						<label for="category-input">Catégorie</label>
+				
+						<select id="category-input" name="category" required>
+							<option value="" disabled selected hidden>Sélectionnez une catégorie</option>
+							<option value="1">Objets</option>
+							<option value="2">Appartements</option>
+							<option value="3">Hôtels & retaurants</option>
+						</select>
+				
+						<div class="container-button-addworks">
+							<button type="submit" id="submitBtn" class="button-modal-2 button-modal-2-active">Valider</button>
+						</div>
+					</form>
+				</div>
 			</aside>
 			
 		

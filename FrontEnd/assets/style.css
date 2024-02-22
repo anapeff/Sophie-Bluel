@@ -387,16 +387,13 @@ a {
     color: black;
 }
 
-
-
-
 /* CSS modale*/
 
 .hidden {
     display: none;
 }
 
-.modal {
+.modal, .modal2 {
 	position: fixed;
 	top:0;
 	left: 0;
@@ -407,9 +404,7 @@ a {
 
 .modal-wrapper {
 	overflow: hidden;
-	
 	margin: 0px auto; 
-	
 	padding : 20px 80px 20px 80px;
 	background-color: #FFF;
 	position: relative;
@@ -520,24 +515,6 @@ a {
     border: 1px solid #1d6154;
     color: #1d6154;
 }
-
-
-
-/* Modale 2 - Add works */
-.modal2 {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
-    max-width: 50vh;
-    padding: 20px 80px;
-    background-color: #FFF;
-    border-radius: 15px;
-    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5); /* Ajout de l'ombre */
-  
-}
-
 
 
 .modal2 .arrow-left .fa-arrow-left {

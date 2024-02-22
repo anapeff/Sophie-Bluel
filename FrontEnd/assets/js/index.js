@@ -138,14 +138,13 @@ fetchCategories();
 
 // Ajouter une nouvelle image : 
 
-
+const fileInput = document.getElementById("file");
+const previewImage = document.getElementById("previewImage");
 
 document.addEventListener('DOMContentLoaded', function () {
     console.log("Le contenu de la page est chargé.");
     const addNewWorkForm = document.getElementById("form-add-new-work");
     if (addNewWorkForm) {
-        const fileInput = document.getElementById("file");
-        const previewImage = document.getElementById("previewImage");
         console.log(previewImage);
 
       
@@ -160,13 +159,9 @@ document.addEventListener('DOMContentLoaded', function () {
                    
                     reader.addEventListener('load', function (e) {
                         previewImage.src = e.target.result;
-
-
                      // Supprimer la propriété 'display: none;' pour afficher l'image
                         previewImage.style.display = "block";
                     
-         
-   
                     });
         
                     reader.readAsDataURL(file);
@@ -225,8 +220,10 @@ function addworks() {
             if (!response.ok) {
                 throw new Error(`Erreur lors de l'ajout du projet, statut ${response.status}`);
             }
-             // Mettre à jour les projets depuis l'API
-             await fetchWorks();
+            // Mettre à jour les projets depuis l'API
+            await fetchWorks();
+            addNewWorkForm.reset();
+            previewImage.style.display = "none";
       
       
         } catch (error) {
