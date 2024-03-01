@@ -263,8 +263,13 @@ footer nav ul {
 	margin-bottom: 51px;
 }
 
-.filtres>button {
-	color: #1D6154;
+
+
+
+
+/* Style par défaut pour les boutons filtres */
+.btn-filtres {
+    color: #1D6154;
 	font-family: syne;
 	background-color: inherit;
 	border-radius: 20px;
@@ -275,13 +280,15 @@ footer nav ul {
 	height: 37px;
 	padding-left: 20px;
 	padding-right: 20px;
+    cursor: pointer;
+   
 }
 
-.filtres>button:hover {
-	background-color: #1D6154;
+/* Style pour le bouton sélectionné */
+.btn-filtres.selected {
+    background-color: #1D6154;
 	color: #FFFFFF;
 }
-
 
 .bad_login {
     display: none;

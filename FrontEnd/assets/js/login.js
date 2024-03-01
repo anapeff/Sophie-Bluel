@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
      
 
         if (isLoggedIn) {
-            loginButton.textContent = "Logout";
+            loginButton.textContent = "logout";
             if (editLink) {
                 editLink.classList.remove("hidden");
             }
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
             filtres.classList.add("hidden");
         }
         } else {
-            loginButton.textContent = "Login";
+            loginButton.textContent = "login";
             if (editLink) {
                 editLink.classList.add("hidden");
             }

@@ -57,6 +57,7 @@ async function fetchWorks() {
 
         // Mettre réponse dans un fichier .json
         projects = await response.json();
+
         gallery.innerHTML="";
         galleryModal.innerHTML="";
 
@@ -67,7 +68,7 @@ async function fetchWorks() {
         });
 
     } catch (error) {
-        console.error('Erreur lors de la récupération des œuvres :', error);
+        console.error('Erreur lors de la récupération des projets :', error);
     }
 }
 
@@ -90,7 +91,10 @@ async function fetchCategories() {
         let filtres = document.querySelector('.filtres');
 
         // Créer bouton Tous
-        filtres.innerHTML = '<button class="btn-filtres" data-id="all">Tous</button>';
+        // Ajouter style par défaut
+        const allButton = '<button class="btn-filtres selected" data-id="all">Tous</button>';
+        filtres.innerHTML = allButton;
+        
 
         // Créer autres boutons filtres
         for (let i = 0; i < categories.length; i++) {
@@ -99,12 +103,19 @@ async function fetchCategories() {
 
         const btnFiltres = document.querySelectorAll('.btn-filtres');
 
-        // Ajoute boucles aux boutons filtres
         btnFiltres.forEach(btn => {
             btn.addEventListener('click', () => {
+                // Supprimez la classe "selected" de tous les boutons
+                btnFiltres.forEach(button => button.classList.remove('selected'));
+                // Ajoutez la classe "selected" au bouton cliqué
+                btn.classList.add('selected');
+        
+                // Filtrer les projets par catégorie
                 const categoryId = btn.getAttribute('data-id');
                 filterProjects(categoryId);
             });
+
+            
         });
 
     } catch (error) {
@@ -227,7 +238,7 @@ function addworks() {
       
       
         } catch (error) {
-            console.error('Erreur pour ajouter projet :', error);
+            console.error('Erreur pour ajouter projets :', error);
         }
     });
 }
