@@ -511,7 +511,6 @@ a {
     border-radius: 25px;
     color: white;
     font-weight: 700;
-
     font-family: Syne;
     cursor: pointer;
 	border: none;
@@ -625,6 +624,7 @@ a {
 	display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100px;
     width: 100%;
     border-top: 1px solid gray;
@@ -642,21 +642,20 @@ a {
     cursor: pointer;
 	border: none;
 }
-
-.container-button-addworks .button-modal-2:hover {
-	background-color: white;
-    border: 1px solid #1d6154;
-    color: #1d6154;
+.error-message {
+    text-align: center;
+    margin-top: 10px;
+   
 }
 
-.button-modal-2-active {
-	background-color: #1d6154;
-	padding: 9px 50px;
+#submitBtn.button-modal-2-active {
+    background-color: #1d6154;
+    padding: 9px 50px;
     border-radius: 25px;
     color: white;
     font-weight: 700;
     font-size: 1rem;
     font-family: Syne;
     cursor: pointer;
-	border: none;
+    border: none;
 }

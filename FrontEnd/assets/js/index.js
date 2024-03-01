@@ -146,11 +146,25 @@ fetchCategories();
 
 
 
+// Ajouter une image
 
-// Ajouter une nouvelle image : 
+
+const ExtentionsOk = ["image/jpeg", "image/png", "image/gif", "image/svg+xml"];
+
+// Taille max
+const maxFileSize = 4 * 1024 * 1024; 
+
+// Vérifie si le fichier est une image et sa taille
+function isImageFile(file) {
+    return ExtentionsOk.includes(file.type) && file.size <= maxFileSize;
+}
 
 const fileInput = document.getElementById("file");
 const previewImage = document.getElementById("previewImage");
+const submitButton = document.getElementById("submitBtn");
+const errorMessage = document.getElementById("error-message");
+const titleInput = document.getElementById("title");
+const categoryInput = document.getElementById("category-input");
 
 document.addEventListener('DOMContentLoaded', function () {
     console.log("Le contenu de la page est chargé.");
@@ -158,23 +172,20 @@ document.addEventListener('DOMContentLoaded', function () {
     if (addNewWorkForm) {
         console.log(previewImage);
 
-      
-
         // Voir image avant de valider 
         if (fileInput) {
             fileInput.addEventListener('change', function (event) {
                 const file = event.target.files[0];
-       // Vérifier si un fichier d'image est sélectionné
-                if (file && file.type.startsWith('image/')) {
+                // Vérifie si un fichier d'image est sélectionné
+                if (file && isImageFile(file)) {
                     const reader = new FileReader();
-                   
                     reader.addEventListener('load', function (e) {
                         previewImage.src = e.target.result;
-                     // Supprimer la propriété 'display: none;' pour afficher l'image
+                        // Supprimer la propriété 'display: none;' pour afficher l'image
                         previewImage.style.display = "block";
-                    
+                        // Vérifie si tous les champs sont remplis après avoir sélectionné une image
+                        checkFormValidity();
                     });
-        
                     reader.readAsDataURL(file);
                 } else {
                     console.log("Veuillez sélectionner une image.");
@@ -183,69 +194,115 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             console.error("Champ de fichier introuvable.");
         }
-        
-        addworks(); // Appel de la fonction addworks 
+
+        addNewWorkForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+       
+            errorMessage.textContent = '';
+
+            // Récupére les valeurs du formulaire
+            const title = titleInput.value.trim();
+            const category = categoryInput.value.trim();
+            const image = fileInput.files[0];
+
+            // Vérifie si une image a été sélectionnée
+            if (!image || !isImageFile(image)) {
+                console.error("Veuillez sélectionner une image.");
+                return;
+            }
+
+            // Vérifie titre et la catégorie 
+            if (!title || !category) {
+                errorMessage.textContent = "Veuillez saisir un titre et une catégorie.";
+                return;
+            }
+
+            // Active le bouton Valider
+            submitButton.classList.add("button-modal-2-active");
+
+            // Récup le token d'authentification depuis localStorage
+            const token = localStorage.getItem('token');
+            if (!token) {
+                errorMessage.textContent = "Token d'authentification introuvable.";
+                return;
+            }
+
+            // Créer un objet FormData pour envoyer les données
+            const formData = new FormData();
+            formData.append("title", title);
+            formData.append("category", category);
+            formData.append("image", image);
+
+            try {
+                // Envoyer les données au serveur
+                const response = await fetch("http://localhost:5678/api/works", {
+                    method: "POST",
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                    body: formData,
+                });
+                console.log("Réponse de la requête POST :", response);
+                if (!response.ok) {
+                    throw new Error(`Erreur lors de l'ajout du projet, statut ${response.status}`);
+                }
+                // Mettre à jour les projets depuis l'API
+                await fetchWorks();
+                addNewWorkForm.reset();
+                previewImage.style.display = "none";
+
+                // Réinitialise la classe CSS du bouton valider
+                submitButton.classList.remove("button-modal-2-active");
+
+            } catch (error) {
+                console.error('Erreur pour ajouter projets :', error);
+            }
+        });
+
+// Fonction pour vérifier si tous les champs sont remplis + fichier image + taille fichier
+function checkFormValidity() {
+    const titleValue = titleInput.value.trim();
+    const categoryValue = categoryInput.value.trim();
+    const imageFile = fileInput.files[0];
+
+    if (titleValue && categoryValue && imageFile) {
+        // Tous les champs sont remplis
+
+        if (isImageFile(imageFile)) {
+            // Le fichier est une image et respecte la taille autoriséé"
+            submitButton.classList.add("button-modal-2-active");
+            errorMessage.textContent = ''; 
+        } else {
+            // Le fichier n'est pas une image ou dépasse la taille autorisée
+            submitButton.classList.remove("button-modal-2-active");
+            if (!isImageFile(imageFile)) {
+                errorMessage.textContent = "Le fichier sélectionné n'est pas une image.";
+            } else {
+                errorMessage.textContent = "La taille du fichier dépasse la limite autorisée (4 Mo).";
+            }
+        }
+    } else {
+        // Si une info  est vide, ne pas activer le bouton
+        submitButton.classList.remove("button-modal-2-active");
+        errorMessage.textContent = '';
+    }
+}
+
+        // Vérifie si tous les champs sont remplis sinon affiche un message d'erreur 
+        titleInput.addEventListener('change', checkFormValidity);
+        categoryInput.addEventListener('change', checkFormValidity);
+        fileInput.addEventListener('change', checkFormValidity);
     }
 });
 
-function addworks() {
-    const addNewWorkForm = document.getElementById("form-add-new-work");
-    addNewWorkForm.addEventListener("submit", async function (e) {
-        e.preventDefault();
-     
-       // Récupérer les valeurs du formulaire
-       const title = document.getElementById("title").value;
-       const category = document.getElementById("category-input").value;
-       const image = document.getElementById("file").files[0];
-      
-        
-       // Vérifier si une image a été sélectionnée
-       if (!image) {
-        console.error("Veuillez sélectionner une image.");
-        return;
-       }
-  
-        // Récupérer le token d'authentification depuis localStorage
-        const token = localStorage.getItem('token');
-        if (!token) {
-            console.error("Token d'authentification introuvable.");
-            return;
-        }
-        // Créer un objet FormData pour envoyer les données
-       
-        const formData = new FormData();
-        formData.append("title", title);
-        formData.append("category", category);
-        formData.append("image", image);
-    
-        try {
-            // Envoyer les données au serveur
-            const response = await fetch("http://localhost:5678/api/works", {
-                method: "POST",
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: formData,
-            });
-            console.log("Réponse de la requête POST :", response); 
-            if (!response.ok) {
-                throw new Error(`Erreur lors de l'ajout du projet, statut ${response.status}`);
-            }
-            // Mettre à jour les projets depuis l'API
-            await fetchWorks();
-            addNewWorkForm.reset();
-            previewImage.style.display = "none";
-      
-      
-        } catch (error) {
-            console.error('Erreur pour ajouter projets :', error);
-        }
-    });
-}
+
+
+
+
+
 
 // Fonction pour supprimer un projet
-
-
 
 async function deleteProject(projectId) {
     try {
